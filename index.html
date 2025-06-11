@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreyer's Vision - Photographe Événementiel & Lifestyle</title>
+    <meta name="description"
+        content="Photographe professionnel spécialisé en événementiel, lifestyle et portraits. Capturons ensemble vos moments précieux avec élégance et authenticité.">
+    <meta name="keywords"
+        content="photographe lifestyle, photographe événementiel Paris, photographe Dijon, photographe Strasbourg, shooting portrait">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        champagne: "#F7E7CE",
+                        silver: "#C0C0C0",
+                        ivory: "#FFFFF0",
+                        dark: "#0A0A0A"
+                    },
+                    fontFamily: {
+                        serif: ["Cormorant Garamond", "serif"],
+                        sans: ["Poppins", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'text-focus': 'textFocus 0.5s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        textFocus: {
+                            '0%': { 'letter-spacing': '0', opacity: '0.8' },
+                            '100%': { 'letter-spacing': '2px', opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .hover-glow:hover {
+            filter: drop-shadow(0 0 8px rgba(247, 231, 206, 0.6));
+        }
+
+        .service-card:hover {
+            transform: scale(1.03);
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-snap {
+            scroll-snap-type: y mandatory;
+        }
+
+        .scroll-snap>section {
+            scroll-snap-align: start;
+        }
+
+        /* Scroll horizontal personnalisé */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        /* Style pour les boutons actifs - à ajouter à votre JS */
+        .filter-btn.active {
+            background-color: rgba(247, 231, 206, 0.1);
+            color: #F7E7CE;
+            border-color: rgba(247, 231, 206, 0.5);
+
+        }
+
+        [data-aos] {
+            transition-property: opacity, transform;
+            transition-timing-function: ease-in-out;
+        }
+
+        /* Réinitialise les transformations spécifiques */
+        [data-aos="fade-up"] {
+            transform: translateY(30px);
+        }
+
+        [data-aos="fade-down"] {
+            transform: translateY(-30px);
+        }
+
+        [data-aos="fade-left"] {
+            transform: translateX(30px);
+        }
+
+        [data-aos="fade-right"] {
+            transform: translateX(-30px);
+        }
+
+        .aos-animate {
+            opacity: 1 !important;
+            transform: translate(0, 0) !important;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-ivory font-sans overflow-x-hidden">
+    <!-- Logo Animation Intro -->
+    <div id="intro" class="fixed inset-0 bg-dark z-50 flex items-center justify-center">
+        <div class="animate-[shutter_1.5s_ease-in-out_forwards] origin-center">
+            <h1 class="text-4xl md:text-6xl font-serif text-champagne">Dreyer's Vision</h1>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-dark/90 backdrop-blur-sm border-b border-champagne/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+            <!-- Logo - Taille ajustable selon vos besoins -->
+            <img src="logo.png" alt="Dreyer's Vision" class="h-10 md:h-12 w-auto">
+            <!-- Texte optionnel à côté du logo -->
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#services" class="hover:text-champagne transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-champagne transition-colors">Portfolio</a>
+                <a href="#about" class="hover:text-champagne transition-colors">Pourquoi moi</a>
+                <a href="#contact" class="hover:text-champagne transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+        <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-posing-in-a-studio-1230-large.mp4"
+                type="video/mp4">
+        </video>
+
+        <div class="relative z-20 text-center px-6 max-w-4xl mx-auto animate-fade-in">
+            <h1 class="mb-6">
+    <a href="#" class="inline-block hover:animate-text-focus">
+        <img src="logo.png" alt="Dreyer's Vision" 
+             class="h-12 md:h-16 lg:h-20 w-auto">
+    </a>
+</h1>
+            <p class="text-xl md:text-2xl mb-10 font-light">L'émotion capturée avec élégance.</p>
+            <a href="#contact"
+                class="px-8 py-3 bg-champagne text-dark font-medium rounded-sm hover:bg-silver hover:text-dark transition-all transform hover:scale-105">
+                Découvrez mon univers
+            </a>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-float">
+            <svg class="w-8 h-8 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="min-h-screen py-20 px-6 bg-dark">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Mes Services</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-dark border border-champagne/20 p-8 rounded-sm hover-glow transition-all duration-300"
+                    data-aos="fade-up">
+                    <div class="text-champagne text-4xl mb-4">📷</div>
+                    <h3 class="text-2xl font-serif mb-4">Événementiel</h3>
+                    <p class="text-ivory/80">Anniversaires, mariages, soirées privées – capturer la spontanéité et
+                        l'élégance de vos instants précieux.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-dark border border-champagne/20 p-8 rounded-sm hover-glow transition-all duration-300"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-champagne text-4xl mb-4">🖼️</div>
+                    <h3 class="text-2xl font-serif mb-4">Studio / Portrait pro</h3>
+                    <p class="text-ivory/80">Séances studio maîtrisées – lumières, angles, ambiance travaillée.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-dark border border-champagne/20 p-8 rounded-sm hover-glow transition-all duration-300"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-champagne text-4xl mb-4">🌆</div>
+                    <h3 class="text-2xl font-serif mb-4">Lifestyle</h3>
+                    <p class="text-ivory/80">Des clichés naturels et raffinés en lumière réelle, en intérieur comme
+                        extérieur.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-dark border border-champagne/20 p-8 rounded-sm hover-glow transition-all duration-300"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-champagne text-4xl mb-4">👗</div>
+                    <h3 class="text-2xl font-serif mb-4">Shooting pour marques</h3>
+                    <p class="text-ivory/80">Direction artistique pour marques : visuels impactants pour campagnes,
+                        lookbooks, réseaux sociaux.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-dark border border-champagne/20 p-8 rounded-sm hover-glow transition-all duration-300"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-champagne text-4xl mb-4">🧑‍🤝‍🧑</div>
+                    <h3 class="text-2xl font-serif mb-4">Portraits individuels & duo</h3>
+                    <p class="text-ivory/80">Pour votre image personnelle ou professionnelle, avec mise en scène
+                        soignée.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="min-h-screen py-20 px-6 bg-dark/95">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Galerie Portfolio</h2>
+
+            <div class="mb-12 relative">
+                <div class="flex overflow-x-auto pb-4 hide-scrollbar space-x-4 px-4">
+                    <button
+                        class="filter-btn flex-shrink-0 px-4 py-2 border border-champagne/30 hover:bg-champagne/10 transition-colors"
+                        data-filter="all">Tous</button>
+                    <button
+                        class="filter-btn flex-shrink-0 px-4 py-2 border border-champagne/30 hover:bg-champagne/10 transition-colors"
+                        data-filter="lifestyle">Lifestyle</button>
+                    <button
+                        class="filter-btn flex-shrink-0 px-4 py-2 border border-champagne/30 hover:bg-champagne/10 transition-colors"
+                        data-filter="studio">Studio</button>
+                    <button
+                        class="filter-btn flex-shrink-0 px-4 py-2 border border-champagne/30 hover:bg-champagne/10 transition-colors"
+                        data-filter="event">Événementiel</button>
+                    <button
+                        class="filter-btn flex-shrink-0 px-4 py-2 border border-champagne/30 hover:bg-champagne/10 transition-colors"
+                        data-filter="brand">Marques</button>
+                </div>
+                <!-- Gradient overlay pour indiquer qu'il y a plus à scroller -->
+                <div class="absolute right-0 top-0 bottom-0 w-20 pointer-events-none"
+                    style="background: linear-gradient(90deg, rgba(10,10,10,0) 0%, rgba(10,10,10,0.9) 100%);"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item group relative overflow-hidden lifestyle" data-aos="fade-up">
+                    <img src="https://picsum.photos/600/800?random=1" alt="Lifestyle photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Session Lifestyle</h3>
+                        <p class="text-ivory/80 mb-4">Paris, 2023</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item group relative overflow-hidden studio" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <img src="https://picsum.photos/600/800?random=2" alt="Studio portrait"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Portrait Studio</h3>
+                        <p class="text-ivory/80 mb-4">Dijon, 2023</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item group relative overflow-hidden event" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <img src="https://picsum.photos/600/800?random=3" alt="Event photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Mariage Élégant</h3>
+                        <p class="text-ivory/80 mb-4">Strasbourg, 2022</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item group relative overflow-hidden brand" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <img src="https://picsum.photos/600/800?random=4" alt="Brand photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Campagne Mode</h3>
+                        <p class="text-ivory/80 mb-4">Paris, 2023</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item group relative overflow-hidden lifestyle" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <img src="https://picsum.photos/600/800?random=5" alt="Lifestyle photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Voyage Urbain</h3>
+                        <p class="text-ivory/80 mb-4">Lyon, 2023</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item group relative overflow-hidden studio" data-aos="fade-up"
+                    data-aos-delay="500">
+                    <img src="https://picsum.photos/600/800?random=6" alt="Studio portrait"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 class="text-xl font-serif text-champagne mb-2">Portrait Corporatif</h3>
+                        <p class="text-ivory/80 mb-4">Paris, 2023</p>
+                        <a href="#" class="text-champagne underline hover:text-silver transition-colors">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-screen py-20 px-6 bg-dark parallax"
+        style="background-image: url('image.jpg')">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="container mx-auto relative z-10">
+            <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Pourquoi me choisir ?</h2>
+
+            <div class="max-w-3xl mx-auto space-y-12">
+                <div class="text-center" data-aos="fade-up">
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-champagne">Authenticité et excellence</h3>
+                    <p class="text-ivory/90">Chaque cliché est une histoire, chaque séance une expérience unique. Je
+                        m'engage à capturer l'essence même de votre personnalité ou événement avec un regard artistique
+                        et authentique.</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-champagne">Sens du détail et storytelling
+                        visuel</h3>
+                    <p class="text-ivory/90">Mon approche va au-delà de la simple photographie. Je crée des récits
+                        visuels où chaque détail compte, chaque émotion est préservée, chaque moment devient intemporel.
+                    </p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-champagne">Prestations haut de gamme sur mesure
+                    </h3>
+                    <p class="text-ivory/90">Des solutions adaptées à vos besoins spécifiques, avec un accompagnement
+                        personnalisé de la conception à la livraison de vos images retouchées avec soin.</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl md:text-3xl font-serif mb-4 text-champagne">Mobilité Paris – Dijon – Strasbourg
+                    </h3>
+                    <p class="text-ivory/90">Basé à Paris mais mobile dans toute la région, je me déplace pour capturer
+                        vos moments importants là où ils se déroulent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="min-h-screen py-20 px-6 bg-dark">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Contact / Demande de devis</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div data-aos="fade-right">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2">Nom complet</label>
+                            <input type="text" id="name"
+                                class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors"
+                                required>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block mb-2">Email</label>
+                            <input type="email" id="email"
+                                class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors"
+                                required>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block mb-2">Téléphone</label>
+                            <input type="tel" id="phone"
+                                class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="service" class="block mb-2">Type de shooting</label>
+                            <select id="service"
+                                class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors">
+                                <option value="">Sélectionnez un service</option>
+                                <option value="event">Événementiel</option>
+                                <option value="studio">Studio / Portrait pro</option>
+                                <option value="lifestyle">Lifestyle</option>
+                                <option value="brand">Shooting pour marques</option>
+                                <option value="portrait">Portraits individuels & duo</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="date" class="block mb-2">Date souhaitée</label>
+                                <input type="date" id="date"
+                                    class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="location" class="block mb-2">Lieu</label>
+                                <select id="location"
+                                    class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors">
+                                    <option value="">Sélectionnez un lieu</option>
+                                    <option value="paris">Paris</option>
+                                    <option value="dijon">Dijon</option>
+                                    <option value="strasbourg">Strasbourg</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block mb-2">Message</label>
+                            <textarea id="message" rows="5"
+                                class="w-full bg-dark border border-champagne/30 px-4 py-3 focus:outline-none focus:border-champagne/70 transition-colors"></textarea>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit"
+                                class="px-8 py-3 bg-champagne text-dark font-medium rounded-sm hover:bg-silver hover:text-dark transition-all transform hover:scale-105">
+                                Planifier une session
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div data-aos="fade-left" class="flex flex-col justify-between">
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-serif mb-4 text-champagne">Coordonnées</h3>
+                            <p class="text-ivory/90">Paris, France</p>
+                            <p class="text-ivory/90">contact@dreyersvision.com</p>
+                            <p class="text-ivory/90">+33 6 12 34 56 78</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-serif mb-4 text-champagne">Réseaux sociaux</h3>
+                            <div class="flex space-x-4">
+                                <a href="#"
+                                    class="text-ivory hover:text-champagne transition-colors text-2xl">Instagram</a>
+                                <a href="#"
+                                    class="text-ivory hover:text-champagne transition-colors text-2xl">Facebook</a>
+                                <a href="#"
+                                    class="text-ivory hover:text-champagne transition-colors text-2xl">Pinterest</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 lg:mt-0">
+                        <img src="https://picsum.photos/600/400?random=8" alt="Dreyer's Vision signature"
+                            class="w-full h-auto rounded-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-dark/95">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Avis Clients</h2>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="testimonial-slider relative">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial text-center px-6 py-8 border border-champagne/20 rounded-sm">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 rounded-full overflow-hidden">
+                                <img src="https://picsum.photos/200?random=9" alt="Client portrait"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="flex justify-center mb-4 text-champagne">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-lg italic mb-6">"Dreyer a capturé notre mariage avec une sensibilité rare. Chaque
+                            photo raconte une histoire et nous transporte immédiatement dans ces moments magiques."</p>
+                        <p class="font-medium">- Sophie & Marc</p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial text-center px-6 py-8 border border-champagne/20 rounded-sm hidden">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 rounded-full overflow-hidden">
+                                <img src="https://picsum.photos/200?random=10" alt="Client portrait"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="flex justify-center mb-4 text-champagne">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-lg italic mb-6">"Pour notre campagne de mode, nous cherchions un photographe avec
+                            une vraie vision artistique. Dreyer a non seulement compris notre univers mais l'a sublimé."
+                        </p>
+                        <p class="font-medium">- Élodie, directrice artistique</p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial text-center px-6 py-8 border border-champagne/20 rounded-sm hidden">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 rounded-full overflow-hidden">
+                                <img src="https://picsum.photos/200?random=11" alt="Client portrait"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="flex justify-center mb-4 text-champagne">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <p class="text-lg italic mb-6">"Mes portraits professionnels réalisés par Dreyer ont
+                            complètement transformé mon image sur LinkedIn. Le résultat est à la fois professionnel et
+                            plein de personnalité."</p>
+                        <p class="font-medium">- Thomas, consultant</p>
+                    </div>
+
+                    <div class="flex justify-center mt-8 space-x-2">
+                        <button
+                            class="testimonial-dot w-3 h-3 rounded-full bg-champagne/50 hover:bg-champagne transition-colors"
+                            data-index="0"></button>
+                        <button
+                            class="testimonial-dot w-3 h-3 rounded-full bg-champagne/50 hover:bg-champagne transition-colors"
+                            data-index="1"></button>
+                        <button
+                            class="testimonial-dot w-3 h-3 rounded-full bg-champagne/50 hover:bg-champagne transition-colors"
+                            data-index="2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-dark border-t border-champagne/10">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-serif mb-4 text-champagne">Dreyer's Vision</h3>
+                    <p class="text-ivory/80">L'émotion capturée avec élégance.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-serif mb-4 text-champagne">Navigation</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services"
+                                class="text-ivory/80 hover:text-champagne transition-colors">Services</a></li>
+                        <li><a href="#portfolio"
+                                class="text-ivory/80 hover:text-champagne transition-colors">Portfolio</a></li>
+                        <li><a href="#about" class="text-ivory/80 hover:text-champagne transition-colors">Pourquoi
+                                moi</a></li>
+                        <li><a href="#contact" class="text-ivory/80 hover:text-champagne transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-serif mb-4 text-champagne">Mentions légales</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-ivory"></a>
+                        <li><a href="#" class="text-ivory/80 hover:text-champagne transition-colors">Politique de
+                                confidentialité</a></li>
+                        <li><a href="#" class="text-ivory/80 hover:text-champagne transition-colors">Conditions
+                                générales</a></li>
+                        <li><a href="#" class="text-ivory/80 hover:text-champagne transition-colors">Mentions
+                                légales</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-champagne/10 mt-12 pt-8 text-center text-ivory/60">
+                <p>&copy; 2023 Dreyer's Vision. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialisation des animations AOS
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: false,
+                offset: 120,
+                mirror: true
+            });
+
+            // Animation d'introduction
+            setTimeout(function () {
+                document.getElementById('intro').style.opacity = '0';
+                setTimeout(function () {
+                    document.getElementById('intro').style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // Variables globales
+            let lastScrollPosition = window.scrollY;
+            let ticking = false;
+            const navbar = document.querySelector('nav');
+            const parallaxElements = document.querySelectorAll('.parallax');
+
+            // Gestion unifiée du scroll
+            window.addEventListener('scroll', function () {
+                const currentScrollPosition = window.pageYOffset;
+
+                // Navbar hide/show
+                if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                }
+
+                // Gestion animations au scroll up
+                if (!ticking) {
+                    window.requestAnimationFrame(function () {
+                        handleScrollEvents(currentScrollPosition);
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+
+                lastScrollPosition = currentScrollPosition;
+            });
+
+            // Fonction principale de gestion du scroll
+            function handleScrollEvents(currentScroll) {
+                // Scroll vers le haut
+                if (currentScroll < lastScrollPosition) {
+                    document.querySelectorAll('[data-aos]').forEach(el => {
+                        if (isElementAboveViewport(el) && !el.classList.contains('aos-animate')) {
+                            resetAosAnimation(el);
+                        }
+                    });
+                }
+
+                // Parallax mobile
+                parallaxElements.forEach(el => {
+                    el.style.backgroundAttachment = window.innerWidth < 768 ? 'scroll' : 'fixed';
+                });
+            }
+
+            // Helper functions
+            function isElementAboveViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return rect.top < 0 && rect.bottom < window.innerHeight;
+            }
+
+            function resetAosAnimation(el) {
+                const settings = el.dataset.aos;
+                const delay = el.dataset.aosDelay;
+                const duration = el.dataset.aosDuration;
+
+                el.classList.remove('aos-animate');
+                el.removeAttribute('data-aos');
+                if (delay) el.removeAttribute('data-aos-delay');
+                if (duration) el.removeAttribute('data-aos-duration');
+
+                void el.offsetWidth; // Reflow
+
+                el.setAttribute('data-aos', settings);
+                if (delay) el.setAttribute('data-aos-delay', delay);
+                if (duration) el.setAttribute('data-aos-duration', duration);
+
+                AOS.animate(el);
+            }
+
+            // Portfolio filtering
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+                    portfolioItems.forEach(item => {
+                        item.style.display = (filter === 'all' || item.classList.contains(filter))
+                            ? 'block'
+                            : 'none';
+                    });
+                });
+            });
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+
+            // Testimonials slider
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            let currentTestimonial = 0;
+            let testimonialInterval;
+
+            function showTestimonial(index) {
+                testimonials.forEach(t => t.classList.add('hidden'));
+                dots.forEach(d => d.classList.remove('bg-champagne'));
+
+                testimonials[index].classList.remove('hidden');
+                dots[index].classList.add('bg-champagne');
+                currentTestimonial = index;
+            }
+
+            function startTestimonialInterval() {
+                testimonialInterval = setInterval(() => {
+                    let nextIndex = (currentTestimonial + 1) % testimonials.length;
+                    showTestimonial(nextIndex);
+                }, 5000);
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    clearInterval(testimonialInterval);
+                    showTestimonial(parseInt(this.dataset.index));
+                    startTestimonialInterval();
+                });
+            });
+
+            showTestimonial(0);
+            startTestimonialInterval();
+
+            // Mobile menu
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'md:hidden fixed inset-0 bg-dark/95 z-30 pt-20 px-6 transform translate-x-full transition-transform duration-300';
+            mobileMenu.innerHTML = `
+    <div class="flex flex-col space-y-6 text-center">
+        <a href="#services" class="block py-3 hover:text-champagne transition-colors">Services</a>
+        <a href="#portfolio" class="block py-3 hover:text-champagne transition-colors">Portfolio</a>
+        <a href="#about" class="block py-3 hover:text-champagne transition-colors">Pourquoi moi</a>
+        <a href="#contact" class="block py-3 hover:text-champagne transition-colors">Contact</a>
+    </div>
+    <button class="absolute top-4 right-6 text-2xl">&times;</button>
+`;
+            document.body.appendChild(mobileMenu);
+
+            // Gestion du toggle
+            mobileMenuButton.addEventListener('click', function () {
+                if (mobileMenu.style.transform === 'translateX(0px)') {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            // Fonctions séparées pour plus de clarté
+            function openMobileMenu() {
+                mobileMenu.style.transform = 'translateX(0)';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenu() {
+                mobileMenu.style.transform = 'translateX(100%)';
+                document.body.style.overflow = '';
+            }
+
+            // Fermeture via le bouton ×
+            mobileMenu.querySelector('button').addEventListener('click', closeMobileMenu);
+
+            // Fermeture via les liens
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Fermeture en cliquant à l'extérieur
+            mobileMenu.addEventListener('click', function (e) {
+                if (e.target === mobileMenu) closeMobileMenu();
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    alert('Formulaire soumis! (Fonctionnalité à implémenter)');
+                    this.reset();
+                });
+            }
+
+            // Window resize
+            window.addEventListener('resize', function () {
+                AOS.refresh();
+            });
+        });
+    </script>
+</body>
+
+</html>
