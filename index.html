@@ -68,6 +68,7 @@
         body {
             max-width: 100%;
             overflow-x: hidden;
+            position: relative;
         }
 
         /* Contrôle des conteneurs principaux */
@@ -77,6 +78,7 @@
             padding-left: 15px;
             margin-right: auto;
             margin-left: auto;
+            max-width: 100%;
         }
 
         /* Vérification des éléments larges */
@@ -85,6 +87,7 @@
         iframe {
             max-width: 100%;
             height: auto;
+            display: block;
         }
 
         .parallax {
@@ -158,6 +161,162 @@
             opacity: 1 !important;
             transform: translate(0, 0) !important;
         }
+
+        /* Amélioration de la réactivité sur mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+            
+            h1, h2, h3 {
+                word-wrap: break-word;
+            }
+            
+            .grid {
+                gap: 1rem;
+            }
+            
+            .service-card {
+                padding: 1rem;
+            }
+        }
+
+        /* Optimisation des animations pour mobile */
+        @media (max-width: 768px) {
+            [data-aos] {
+                transform: none !important;
+                opacity: 1 !important;
+                transition: none !important;
+            }
+
+            .parallax {
+                background-attachment: scroll !important;
+                background-position: center !important;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+
+            /* Optimisation des transitions pour mobile */
+            .service-card,
+            .portfolio-item,
+            .hover-glow {
+                transition: transform 0.3s ease-out !important;
+                will-change: transform;
+            }
+
+            /* Amélioration de la performance des animations */
+            .animate-fade-in,
+            .animate-text-focus,
+            .animate-float {
+                animation-duration: 0.5s !important;
+                animation-fill-mode: both;
+                will-change: transform, opacity;
+            }
+        }
+
+        /* Optimisation générale des animations */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Amélioration de la performance du scroll */
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Effet Parallax amélioré */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%; /* Plus grand que 100% pour permettre le défilement */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .parallax-bg img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: transform;
+        }
+
+        @media (min-width: 769px) {
+            .parallax-bg {
+                position: fixed;
+                height: 100vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .parallax-bg {
+                position: absolute;
+                height: 120%;
+            }
+        }
+
+        /* Optimisation des animations de la galerie */
+        .portfolio-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .portfolio-item.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .portfolio-item img {
+            transform: scale(1);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Optimisation du filtrage */
+        .filter-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, background-color, color;
+        }
+
+        .filter-btn.active {
+            transform: scale(1.05);
+        }
+
+        /* Optimisation des animations AOS pour la galerie */
+        [data-aos="fade-up"] {
+            transform: translateY(30px);
+            opacity: 0;
+            transition-property: transform, opacity;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-aos="fade-up"].aos-animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -174,7 +333,7 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center">
                 <!-- Logo - Taille ajustable selon vos besoins -->
-                <img src="logo.png" alt="Dreyer's Vision" class="h-10 md:h-12 w-auto">
+                <img src="logo.png" alt="Dreyer's Vision" class="h-10 md:h-12 w-auto" loading="eager">
                 <!-- Texte optionnel à côté du logo -->
             </a>
             <div class="hidden md:flex space-x-8">
@@ -305,8 +464,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Portfolio Item 1 -->
                 <div class="portfolio-item group relative overflow-hidden lifestyle" data-aos="fade-up">
-                    <img src="https://picsum.photos/600/800?random=1" alt="Lifestyle photography"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/Lifestyle/DSC01102.jpg" alt="Lifestyle photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Session Lifestyle</h3>
@@ -318,8 +477,8 @@
                 <!-- Portfolio Item 2 -->
                 <div class="portfolio-item group relative overflow-hidden studio" data-aos="fade-up"
                     data-aos-delay="100">
-                    <img src="https://picsum.photos/600/800?random=2" alt="Studio portrait"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/Studio/DSC09236.jpg" alt="Studio portrait"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Portrait Studio</h3>
@@ -331,8 +490,8 @@
                 <!-- Portfolio Item 3 -->
                 <div class="portfolio-item group relative overflow-hidden event" data-aos="fade-up"
                     data-aos-delay="200">
-                    <img src="https://picsum.photos/600/800?random=3" alt="Event photography"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/evenement/DSC01586-3.jpg" alt="Event photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Mariage Élégant</h3>
@@ -344,8 +503,8 @@
                 <!-- Portfolio Item 4 -->
                 <div class="portfolio-item group relative overflow-hidden brand" data-aos="fade-up"
                     data-aos-delay="300">
-                    <img src="https://picsum.photos/600/800?random=4" alt="Brand photography"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/DSC05753.jpg" alt="Brand photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Campagne Mode</h3>
@@ -357,8 +516,8 @@
                 <!-- Portfolio Item 5 -->
                 <div class="portfolio-item group relative overflow-hidden lifestyle" data-aos="fade-up"
                     data-aos-delay="400">
-                    <img src="https://picsum.photos/600/800?random=5" alt="Lifestyle photography"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/Lifestyle/DSC04844.jpg" alt="Lifestyle photography"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Voyage Urbain</h3>
@@ -370,8 +529,8 @@
                 <!-- Portfolio Item 6 -->
                 <div class="portfolio-item group relative overflow-hidden studio" data-aos="fade-up"
                     data-aos-delay="500">
-                    <img src="https://picsum.photos/600/800?random=6" alt="Studio portrait"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="Smash/Studio/DSC09237.jpg" alt="Studio portrait"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
                     <div
                         class="absolute inset-0 bg-black/70 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <h3 class="text-xl font-serif text-champagne mb-2">Portrait Corporatif</h3>
@@ -389,7 +548,6 @@
         <div class="absolute inset-0 bg-black/35 z-0"></div>
         <div class="container mx-auto relative z-10">
             <h2 class="text-3xl md:text-5xl font-serif text-center mb-16 text-champagne">Pourquoi me choisir ?</h2>
-
             <div class="max-w-3xl mx-auto space-y-12">
                 <div class="text-center" data-aos="fade-up">
                     <h3 class="text-2xl md:text-3xl font-serif mb-4 text-champagne">Authenticité et excellence</h3>
@@ -522,8 +680,8 @@
                     </div>
 
                     <div class="mt-8 lg:mt-0">
-                        <img src="https://picsum.photos/600/400?random=8" alt="Dreyer's Vision signature"
-                            class="w-full h-auto rounded-sm">
+                        <img src="logo.png" alt="Dreyer's Vision signature"
+                            class="w-full h-auto rounded-sm" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -656,8 +814,42 @@
                 easing: 'ease-in-out',
                 once: false,
                 offset: 120,
-                mirror: true
+                mirror: false,
+                disable: false, // Enable animations on all devices
+                startEvent: 'DOMContentLoaded',
+                disableMutationObserver: false,
+                delay: 0
             });
+
+            // Optimisation des animations au scroll
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(function() {
+                        scrollTimeout = null;
+                        AOS.refresh(); // Rafraîchir les animations
+                    }, 100);
+                }
+            }, { passive: true });
+
+            // Optimisation du parallax sur mobile
+            function updateParallax() {
+                const isMobile = window.innerWidth < 768;
+                document.querySelectorAll('.parallax').forEach(el => {
+                    if (isMobile) {
+                        // Sur mobile, on utilise une approche alternative pour le parallax
+                        const scrolled = window.pageYOffset;
+                        const rate = scrolled * 0.5;
+                        el.style.backgroundPosition = `center ${rate}px`;
+                    } else {
+                        el.style.backgroundAttachment = 'fixed';
+                    }
+                });
+            }
+
+            window.addEventListener('resize', updateParallax, { passive: true });
+            window.addEventListener('scroll', updateParallax, { passive: true });
+            updateParallax();
 
             // Animation d'introduction
             setTimeout(function () {
@@ -738,24 +930,61 @@
                 AOS.animate(el);
             }
 
-            // Portfolio filtering
+            // Optimisation du filtrage de la galerie
             const filterBtns = document.querySelectorAll('.filter-btn');
             const portfolioItems = document.querySelectorAll('.portfolio-item');
+            let currentFilter = 'all';
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+            function filterPortfolio(filter) {
+                if (currentFilter === filter) return;
+                currentFilter = filter;
 
-                    const filter = this.dataset.filter;
+                // Optimisation des performances avec requestAnimationFrame
+                requestAnimationFrame(() => {
                     portfolioItems.forEach(item => {
-                        item.style.display = (filter === 'all' || item.classList.contains(filter))
-                            ? 'block'
-                            : 'none';
+                        const shouldShow = filter === 'all' || item.classList.contains(filter);
+                        
+                        if (shouldShow) {
+                            item.classList.remove('hidden');
+                            // Petit délai pour l'animation
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            // Attendre la fin de l'animation avant de cacher
+                            setTimeout(() => {
+                                item.classList.add('hidden');
+                            }, 300);
+                        }
                     });
                 });
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterPortfolio(this.dataset.filter);
+                });
             });
+
+            // Initialisation
             document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+            filterPortfolio('all');
+
+            // Optimisation du scroll pour la galerie
+            let galleryScrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (!galleryScrollTimeout) {
+                    galleryScrollTimeout = setTimeout(function() {
+                        AOS.refresh();
+                        galleryScrollTimeout = null;
+                    }, 100);
+                }
+            }, { passive: true });
 
             // Testimonials slider
             const testimonials = document.querySelectorAll('.testimonial');
@@ -793,15 +1022,15 @@
             // Mobile menu
             const mobileMenuButton = document.querySelector('.md\\:hidden');
             const mobileMenu = document.createElement('div');
-            mobileMenu.className = 'md:hidden fixed inset-0 bg-dark/95 z-30 pt-20 px-6 transform translate-x-full transition-transform duration-300';
+            mobileMenu.className = 'md:hidden fixed inset-0 bg-dark/95 z-30 pt-20 px-6 transform translate-x-full transition-transform duration-300 backdrop-blur-sm';
             mobileMenu.innerHTML = `
     <div class="flex flex-col space-y-6 text-center">
-        <a href="#services" class="block py-3 hover:text-champagne transition-colors">Services</a>
-        <a href="#portfolio" class="block py-3 hover:text-champagne transition-colors">Portfolio</a>
-        <a href="#about" class="block py-3 hover:text-champagne transition-colors">Pourquoi moi</a>
-        <a href="#contact" class="block py-3 hover:text-champagne transition-colors">Contact</a>
+        <a href="#services" class="block py-3 hover:text-champagne transition-colors text-lg">Services</a>
+        <a href="#portfolio" class="block py-3 hover:text-champagne transition-colors text-lg">Portfolio</a>
+        <a href="#about" class="block py-3 hover:text-champagne transition-colors text-lg">Pourquoi moi</a>
+        <a href="#contact" class="block py-3 hover:text-champagne transition-colors text-lg">Contact</a>
     </div>
-    <button class="absolute top-4 right-6 text-2xl">&times;</button>
+    <button class="absolute top-4 right-6 text-2xl hover:text-champagne transition-colors">&times;</button>
 `;
             document.body.appendChild(mobileMenu);
 
@@ -865,6 +1094,29 @@
             // Window resize
             window.addEventListener('resize', function () {
                 AOS.refresh();
+            });
+
+            // Gestion du parallax
+            function handleParallax() {
+                const parallaxElements = document.querySelectorAll('.parallax');
+                
+                function updateParallax() {
+                    parallaxElements.forEach(el => {
+                        if (window.innerWidth < 768) {
+                            el.style.backgroundAttachment = 'scroll';
+                        } else {
+                            el.style.backgroundAttachment = 'fixed';
+                        }
+                    });
+                }
+
+                window.addEventListener('resize', updateParallax, { passive: true });
+                updateParallax();
+            }
+
+            // Appeler la fonction après le chargement du DOM
+            document.addEventListener('DOMContentLoaded', function() {
+                handleParallax();
             });
         });
     </script>
